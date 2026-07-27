@@ -14,3 +14,8 @@ test(`Open Browser ${user_data.username}`,async({page})=>{
     console.log(await page.url())
 })
 }
+
+test('Open Crm Applocation',async({page})=>{
+    await page.goto('/');
+    console.log(await page.title())
+})

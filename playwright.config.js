@@ -2,6 +2,14 @@
 import { defineConfig, devices } from '@playwright/test';
 import { junit } from 'node:test/reporters';
 
+  const environments={
+    dev : 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
+    stage : '',
+    uat : '',
+    prod : ''
+  };
+
+ const targetUrl = environments[process.env.ENV] || environments.dev;
 
 export default defineConfig({
   testDir: './tests',
@@ -12,7 +20,9 @@ export default defineConfig({
   expect:{
       timeout:50*100,
     },
+ 
   use: {
+    baseURL: targetUrl,
     trace: 'on-first-retry',
     screenshot:'only-on-failure',
     video:'on',
