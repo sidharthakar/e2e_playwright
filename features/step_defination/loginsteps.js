@@ -11,5 +11,5 @@ When('Login With Correct {string} and {string}', async function (username, passw
 });
 
 Then('Validated the {string} Screen have {string}', async function (Titel, Screen) {
-    await expect(this.page).toHaveTitle('Swag Labs');
+    await expect(this.page).toHaveTitle(Titel);
 });
