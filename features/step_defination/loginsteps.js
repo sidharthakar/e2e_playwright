@@ -1,7 +1,4 @@
 const{test,expect} = require('@playwright/test')
-const {ActionsUtility} = require('../../utility/ActionsUtility')
-const {LoginPage} = require('../../pages/LoginPage')
-const data_login = require('../../data.json')
 const { Given, When, Then } = require('@cucumber/cucumber');
 
 
