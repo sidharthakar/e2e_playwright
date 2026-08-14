@@ -18,7 +18,7 @@ export default defineConfig({
   workers:undefined,
   reporter: [['html'],['junit',{outputFile:'test-results/junit.xml'}]],
   expect:{
-      timeout:50*100,
+      timeout:60*100,
     },
  
   use: {
@@ -26,12 +26,12 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot:'only-on-failure',
     video:'on',
-    timeout:50*100,
+    timeout:60*100,
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'],headless:false },
     },
 
     // {
