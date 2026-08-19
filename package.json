@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "cucumber_regression":"npx cucumber-js --tags '@Regression' --parallel 2 --exit --format html:cucumber-report.html --retry 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,4 +21,5 @@
   "dependencies": {
     "@cucumber/cucumber": "^13.2.1"
   }
+
 }
