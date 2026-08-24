@@ -12,7 +12,6 @@ class ActionsUtility{
           await selector.dblclick();
         }
     async fillInput(selector, text) {
-        await selector.clear();
         await selector.fill(text);
     }
     async hoverOver(selector) {
