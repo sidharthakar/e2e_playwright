@@ -7,34 +7,45 @@ on:
     branches: [ main, master ]
 
 permissions:
-  id-token: write  # Fixes the Azure federated token error
+  id-token: write
   contents: read
-
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-        
-    # Installs the local node modules (like @playwright/test)
     - name: Install dependencies
       run: npm ci
 
-    # 🟢 REQUIRED: Installs Linux system libraries needed by the Playwright engine
-    - name: Install Playwright OS Dependencies
-      run: npx playwright install-deps
+    # - name: Install Playwright Browsers
+    #   id: playwright-version
+    #   run: echo "version=$(node -e "console.log(require('@playwright/test/package.json').version)")" >> $GITHUB_OUTPUT
+
+    # - name: Cache Playwright Browsers
+    #   id: playwright-cache
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: ~/.cache/ms-playwright
+    #     key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+
+    # - name: Install Playwright OS Dependencies
+    #   run: npx playwright install-deps
+
+    # - name: Install Playwright Browsers
+    #   if: steps.playwright-cache.outputs.cache-hit != 'true'
+    #   run: npx playwright install
+
+    # - name: Run Playwright tests
+    #   run: npx playwright test
 
     - name: Log in to Azure
       uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+         creds: ${{ secrets.AZURE_CREDS }}
 
     - name: Run Playwright tests on Azure
       env:
